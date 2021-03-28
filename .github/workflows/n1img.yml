@@ -131,14 +131,6 @@ jobs:
              4. chmod +x *.sh
              5. ./升级脚本名字 img固件名 
         artifacts: "/opt/openwrt/tmp/*.xz"   
-
-    - name: Upload firmware to WeTransfer
-      if: steps.xz.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
-      run: |
-        curl -fsSL git.io/file-transfer | sh
-        ./transfer cow --block 2621440 -s -p 64 --no-progress /opt/openwrt/tmp/$RELEASE_NAME.xz 2>&1 | tee cowtransfer.log
-        echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
-        echo "::set-output name=url::$(cat cowtransfer.log | grep https | cut -f3 -d" ")"
         
     - name: Remove old Releases
       uses: dev-drprasad/delete-older-releases@v0.1.0
