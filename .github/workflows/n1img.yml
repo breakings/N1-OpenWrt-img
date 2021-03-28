@@ -29,7 +29,7 @@ jobs:
           - flippy_name: 56
             flippy_filename: Armbian_20.10_Aml-s9xxx_buster_5.4.108-flippy-56+o.img.xz
             flippy_url:  https://github.com/Netflixxp/fdibiao/releases/download/56%2B0/Armbian_20.10_Aml-s9xxx_buster_5.4.108-flippy-56+o.img.xz
-            release_name: openwrt_s905d_n1_R21.3.27_k5.4.108-flippy-56+.img
+            release_name: openwrt_s905d_n1_R21.3.27_k5.4.108-flippy-56+o.img
 
     env:
       FLIPPY_NAME: ${{ matrix.flippy_name }}   
