@@ -15,7 +15,7 @@ BOARD=n1
 SUBVER=$1
 
 # Armbian 源文件
- LNX_IMG="/home/jack/opt/imgs/Armbian_20.10_Aml-s9xxx_buster_${KERNEL_VERSION}.img"
+ LNX_IMG="/opt/imgs/Armbian_20.10_Aml-s9xxx_buster_${KERNEL_VERSION}.img"
  #LNX_IMG="/home/jack/opt/imgs/Armbian_21.05.0-trunk_Odroidc2_hirsute_dev_${KERNEL_VERSION}.img"
 # not used
 # BOOT_TGZ="/home/jack/opt/kernel/boot-${KERNEL_VERSION}.tar.gz"
