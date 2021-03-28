@@ -358,12 +358,12 @@ fi
 [ -f $FLIPPY ] && cp $FLIPPY usr/sbin/
 if [ -f $BANNER ];then
     cp -f $BANNER etc/banner
-    echo " Base on OpenWrt ${OPENWRT_VER} by lean & lienol" >> etc/banner
-    echo " Kernel ${KERNEL_VERSION}" >> etc/banner
+    echo " Base on OpenWrt ${OPENWRT_VER} by lean & lienol" >> /etc/banner
+    echo " Kernel ${KERNEL_VERSION}" >> /etc/banner
     TODAY=$(date +%Y-%m-%d)
-    echo " Packaged by ${WHOAMI} on ${TODAY}" >> etc/banner
-    echo " SOC: ${SOC}	BOARD: ${BOARD}" >> etc/banner
-    echo >> etc/banner
+    echo " Packaged by ${WHOAMI} on ${TODAY}" >> /etc/banner
+    echo " SOC: ${SOC}	BOARD: ${BOARD}" >> /etc/banner
+    echo >> /etc/banner
 fi
 
 if [ -f $BAL_ETH_IRQ ];then
