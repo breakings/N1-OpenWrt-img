@@ -121,7 +121,7 @@ jobs:
         commit: main
         token: ${{ secrets.GITHUB_TOKEN   }}
         body: |
-          ## 以下为基于OpenWrt官方最新maser分支编译的N1最新固件（首次需优盘全新刷入，无法保留配置，后续可以直接保留配置升级）
+          ## 以下为基于OpenWrt官方最新master分支编译的N1最新固件（首次需优盘全新刷入，无法保留配置，后续可以直接保留配置升级）
           默认IP：192.168.1.1 默认密码： password
           Openwrt🚀(注:此版本为breakings个人的精简版。只有+o版，+o版为flowoffload加速)
           N1在线升级方法：
