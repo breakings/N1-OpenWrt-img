@@ -29,7 +29,7 @@ jobs:
           - flippy_name: 56
             flippy_filename: Armbian_20.10_Aml-s9xxx_buster_5.4.108-flippy-56+o.img.xz
             flippy_url:  https://github.com/Netflixxp/fdibiao/releases/download/56%2B0/Armbian_20.10_Aml-s9xxx_buster_5.4.108-flippy-56+o.img.xz
-            release_name: openwrt_s905d_n1_R21.3.27_k5.4.108-flippy-56+o.img
+            release_name: openwrt_R21.02_SNAPSHOT_s905d_n1_k5.4.108-flippy-56+o.img
 
     env:
       FLIPPY_NAME: ${{ matrix.flippy_name }}   
@@ -99,8 +99,8 @@ jobs:
         sudo chmod  -R 777 /opt
         cd /opt/openwrt
              
-        sudo chmod +x mk_s905d_n1.sh
-        sudo ./mk_s905d_n1.sh 
+        sudo chmod +x n1.sh
+        sudo ./n1.sh 
     
     - name: xz-z
       id: xz
@@ -121,12 +121,12 @@ jobs:
         commit: main
         token: ${{ secrets.GITHUB_TOKEN   }}
         body: |
-          ## 以下为N1最新固件（如遇上游更新，次日上午7时自动编译打包最新固件）
+          ## 以下为基于OpenWrt官方最新maser分支编译的N1最新固件（首次需优盘全新刷入，无法保留配置，后续可以直接保留配置升级）
           默认IP：192.168.1.1 默认密码： password
           Openwrt🚀(注:此版本为breakings个人的精简版。只有+o版，+o版为flowoffload加速)
           N1在线升级方法：
              1. cd /mnt/mmcblk2p4
-             2. wget 升级脚本下载 https://github.com/breakings/OpenWrt/blob/main/56/opt/openwrt/files/update-amlogic-openwrt.sh
+             2. wget 升级脚本下载 https://github.com/breakings/N1-OpenWrt-imgs/blob/main/56/opt/openwrt/files/update-amlogic-openwrt.sh
              3. wget img后缀名的固件链接,鼠标右击后缀.img文件获取链接地址
              4. chmod +x *.sh
              5. ./升级脚本名字 img固件名 
