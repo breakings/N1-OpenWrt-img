@@ -11,7 +11,7 @@ source make.env
 SOC=h6
 BOARD=vplus
 SUBVER=$1
-LNX_IMG="/home/jack/opt/imgs/Armbian_20.10_VPlus_buster_${KERNEL_VERSION}.img"
+LNX_IMG="/opt/imgs/Armbian_20.10_VPlus_buster_${KERNEL_VERSION}.img"
 
 SKIP_MB=16
 BOOT_MB=160
