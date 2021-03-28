@@ -86,7 +86,7 @@ SMB4_PATCH="${PWD}/files/smb4.11_enable_smb1.patch"
 SYSCTL_CUSTOM_CONF="${PWD}/files/99-custom.conf"
 
 # 20200709 add
-COREMARK="${PWD}/files/coremark.sh"
+COREMARK="${PWD}/files/coremark-official.sh"
 
 # 20200930 add
 INST_SCRIPT="${PWD}/files/s905d/install-to-emmc.sh"
