@@ -8,7 +8,7 @@ our $all_cpu_mask = 0;
 &read_config();
 &read_irq_data();
 &update_smp_affinity();
-&tunning_eth_params();
+&enable_eth_rps_rfs();
 exit(0);
 
 ############################## sub functions #########################
@@ -88,32 +88,50 @@ sub update_smp_affinity {
     }
 }
 
-sub tunning_eth_params {
+sub tunning_eth_ring {
+    my $eth = shift;
+    my $buf = `/usr/sbin/ethtool -g ${eth} 2>/dev/null`;
+    if($? == 0) {
+        $buf =~ s/\r|\n/\t/g;
+	if( $buf =~ m/.+?Pre-set maximums:\s+RX:\s+(\d+).+?TX:\s+(\d+).+?Current hardware settings:\s+RX:\s+(\d+).+?TX:\s+(\d+)/) {
+            my $max_rx_ring  = $1;
+            my $max_tx_ring  = $2;
+            my $cur_rx_ring  = $3;
+            my $cur_tx_ring  = $4;
+
+   	    my $target_rx_ring = $max_rx_ring / 2;
+	    my $target_tx_ring = $max_tx_ring / 2;
+
+	    if( ($max_rx_ring > 0) && ($cur_rx_ring != $target_rx_ring ) ) {
+	        system "/usr/sbin/ethtool -G ${eth} rx ${target_rx_ring} >/dev/null 2>&1";
+            }
+	    if( ($max_tx_ring > 0) && ($cur_tx_ring != $target_tx_ring ) ) {
+	        system "/usr/sbin/ethtool -G ${eth} tx ${target_tx_ring} >/dev/null 2>&1";
+            }
+	}
+    } 
+}
+
+sub enable_eth_rps_rfs {
     my $rps_sock_flow_entries = 0;
     for my $eth ("eth0","eth1") {
-	my $cur_rx;
+
         if(-d "/sys/class/net/${eth}/queues/rx-0") {
-	    system "/usr/sbin/ethtool -g ${eth} >/dev/null 2>&1";
-	    if($? == 0) {
-	        my $max_rx  = `/usr/sbin/ethtool -g ${eth} | grep -A4 'Pre-set maximums:' | awk '\$1~/RX:/ {print \$2}'`;
-	        my $max_tx  = `/usr/sbin/ethtool -g ${eth} | grep -A4 'Pre-set maximums:' | awk '\$1~/TX:/ {print \$2}'`;
-                system "ethtool -G ${eth} rx ${max_rx} >/dev/null 2>&1";
-                system "ethtool -G ${eth} tx ${max_tx} >/dev/null 2>&1";
-                $rps_sock_flow_entries += $max_rx;
-		$cur_rx = $max_rx;
-	    } else {
-                $rps_sock_flow_entries += 4096;
-		$cur_rx = 4096;
-	    }
+	    my $value = 4096;
+            $rps_sock_flow_entries += $value;
 	    open my $fh, ">", "/sys/class/net/${eth}/queues/rx-0/rps_cpus" or die;
 	    print $fh $all_cpu_mask;
 	    close $fh;
+
+	    open $fh, ">", "/sys/class/net/${eth}/queues/rx-0/rps_flow_cnt" or die;
+	    print $fh $value;
+	    close $fh;
+
 	    open my $fh, ">", "/sys/class/net/${eth}/queues/tx-0/xps_cpus" or die;
 	    print $fh $all_cpu_mask;
 	    close $fh;
-	    open $fh, ">", "/sys/class/net/${eth}/queues/rx-0/rps_flow_cnt" or die;
-	    print $fh $cur_rx;
-	    close $fh;
+
+            &tunning_eth_ring($eth) if ($eth ne "eth0");
         }
     }
     open my $fh, ">", "/proc/sys/net/core/rps_sock_flow_entries" or die;
