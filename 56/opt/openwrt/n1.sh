@@ -357,7 +357,7 @@ fi
 [ -f $TTYD ] && cp $TTYD etc/init.d/
 [ -f $FLIPPY ] && cp $FLIPPY usr/sbin/
 if [ -f $BANNER ];then
-    cp -f $BANNER etc/banner
+    cp -f $BANNER /etc/banner
     echo " Base on OpenWrt ${OPENWRT_VER} by lean & lienol" >> /etc/banner
     echo " Kernel ${KERNEL_VERSION}" >> /etc/banner
     TODAY=$(date +%Y-%m-%d)
