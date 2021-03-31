@@ -16,7 +16,6 @@ SUBVER=$1
 
 # Armbian 源文件
  LNX_IMG="/opt/imgs/Armbian_20.10_Aml-s9xxx_buster_${KERNEL_VERSION}.img"
- #LNX_IMG="/home/jack/opt/imgs/Armbian_21.05.0-trunk_Odroidc2_hirsute_dev_${KERNEL_VERSION}.img"
 # not used
 # BOOT_TGZ="/home/jack/opt/kernel/boot-${KERNEL_VERSION}.tar.gz"
 # MODULES_TGZ="/home/jack/opt/kernel/modules-${KERNEL_VERSION}.tar.gz"
@@ -120,7 +119,7 @@ WIRELESS_CONFIG="${PWD}/files/s905d/wireless"
 # 20210307 add
 SS_LIB="${PWD}/files/ss-glibc/lib-glibc.tar.xz"
 SS_BIN="${PWD}/files/ss-glibc/ss-bin-glibc.tar.xz"
-JQ="${PWD}/files/jq"
+#JQ="${PWD}/files/jq"
 ###########################################################################
 
 # 检查环境
@@ -357,13 +356,13 @@ fi
 [ -f $TTYD ] && cp $TTYD etc/init.d/
 [ -f $FLIPPY ] && cp $FLIPPY usr/sbin/
 if [ -f $BANNER ];then
-    cp -f $BANNER /etc/banner
-    echo " Base on OpenWrt ${OPENWRT_VER} by lean & lienol" >> /etc/banner
-    echo " Kernel ${KERNEL_VERSION}" >> /etc/banner
+    cp -f $BANNER etc/banner
+    echo " Base on OpenWrt ${OPENWRT_VER} by lean & lienol" >> etc/banner
+    echo " Kernel ${KERNEL_VERSION}" >> etc/banner
     TODAY=$(date +%Y-%m-%d)
-    echo " Packaged by ${WHOAMI} on ${TODAY}" >> /etc/banner
-    echo " SOC: ${SOC}	BOARD: ${BOARD}" >> /etc/banner
-    echo >> /etc/banner
+    echo " Packaged by ${WHOAMI} on ${TODAY}" >> etc/banner
+    echo " SOC: ${SOC}	BOARD: ${BOARD}" >> etc/banner
+    echo >> etc/banner
 fi
 
 if [ -f $BAL_ETH_IRQ ];then
@@ -396,7 +395,7 @@ fi
 [ -d run ] || mkdir -p run
 sed -e 's/ttyAMA0/ttyAML0/' -i ./etc/inittab
 sed -e 's/ttyS0/tty0/' -i ./etc/inittab
-#sed -e 's/\/opt/\/etc/' -i ./etc/config/qbittorrent
+sed -e 's/\/opt/\/etc/' -i ./etc/config/qbittorrent
 sed -e "s/#PermitRootLogin prohibit-password/PermitRootLogin yes/" -i ./etc/ssh/sshd_config 2>/dev/null
 sss=$(date +%s)
 ddd=$((sss/86400))
