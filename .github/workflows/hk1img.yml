@@ -1,4 +1,4 @@
-name: Build HK1 img
+name: Build n1 img
 
 on:
   repository_dispatch:
@@ -7,11 +7,11 @@ on:
       days:
         description: 'Number of days.'
         required: true
-        default: 60
+        default: 360
       minimum_runs:
         description: 'The minimum runs to keep for each workflow.'
         required: true
-        default: 6
+        default: 60
       
 env:
   UPLOAD_COWTRANSFER: false
@@ -29,7 +29,7 @@ jobs:
           - flippy_name: 56
             flippy_filename: Armbian_20.10_Aml-s9xxx_buster_5.4.108-flippy-56+o.img.xz
             flippy_url: https://github.com/Netflixxp/fdibiao/releases/download/56%2B0/Armbian_20.10_Aml-s9xxx_buster_5.4.108-flippy-56+o.img.xz
-            release_name: HK1-jcnf-mini-56+o.img
+            release_name: N1-56+o.img
 
     env:
       FLIPPY_NAME: ${{ matrix.flippy_name }}   
@@ -99,8 +99,8 @@ jobs:
         sudo chmod -R 777 /opt
         cd /opt/openwrt
              
-        sudo chmod +x mk_s905x3_multi.sh
-        sudo ./mk_s905x3_multi.sh
+        sudo chmod +x mk_s905d_n1.sh
+        sudo ./mk_s905d_n1.sh
         	
     - name: xz-z
       id: xz
@@ -121,8 +121,8 @@ jobs:
         commit: main
         token: ${{ secrets.GITHUB_TOKEN   }}
         body: |
-          ## 以下为N1和HK1的最新固件（如遇上游更新，次日上午7时自动编译打包最新固件）
-          默认IP：192.168.1.99 默认密码： password
+          ## 以下为N1的最新固件（如遇上游更新，次日上午7时自动编译打包最新固件）
+          默认IP：192.168.1.1 默认密码： password
           Openwrt🚀(注:此版本为jcnf个人的精简版。只有+o版，+o版为flowoffload加速)
           N1和HK1在线升级方法：
              1. cd /mnt/mmcblk2p4
