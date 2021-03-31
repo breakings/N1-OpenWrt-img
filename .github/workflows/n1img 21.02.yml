@@ -1,4 +1,4 @@
-name: Build N1 img
+name: Build N1 OpenWrt 21.02 img
 
 on:
   repository_dispatch:
