@@ -52,7 +52,7 @@
   dd   if=/dev/zero   of=/dev/mmcblk2  bs=512  count=1  &&  sync
 ```
 
-#![购买奈飞正规合租车](https://jcnf.xyz/nf)
+# [购买奈飞正规合租车](https://jcnf.xyz/nf)
 
 # 感激
  * [flippy](https://www.right.com.cn/forum/space-uid-285101.html)
