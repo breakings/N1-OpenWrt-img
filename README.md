@@ -43,9 +43,6 @@
 # 自动更新说明
 固件采用自动编译，Acrions将会在每天监控上游代码是否更新，如passwall ssrp等，一旦检测到上游代码更加将会自动编译打包，于每天上午7时30分发布最新版固件。
 
-# 固件下载
-点击右面的 “Releases”，然后会看到N1和s905x3（HK1）的固件，根据自己需求下载就好！
-
 # N1新版固件如何刷
 
 [看教程](https://ybfl.xyz/100.html)
@@ -54,6 +51,8 @@
 ```
   dd   if=/dev/zero   of=/dev/mmcblk2  bs=512  count=1  &&  sync
 ```
+
+#![购买奈飞正规合租车](https://jcnf.xyz/nf)
 
 # 感激
  * [flippy](https://www.right.com.cn/forum/space-uid-285101.html)
