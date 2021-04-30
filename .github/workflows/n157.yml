@@ -113,7 +113,7 @@ jobs:
           N1和HK1在线升级方法：
              1. cd /mnt/mmcblk2p4
              2. wget 升级脚本链接,鼠标右击后缀.sh文件获取链接地址
-             3. wget img.gz后缀名的固件链接,鼠标右击后缀.img。gz文件获取链接地址
+             3. wget img.gz后缀名的固件链接,鼠标右击后缀.img.gz文件获取链接地址
              4. gzip -d 解压缩上一步下载的固件全名
              5. chmod +x *.sh
              6. ./升级脚本名字 img固件名
